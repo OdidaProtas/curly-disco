@@ -5,7 +5,7 @@ export default function ProjectForm() {
   const { name, step } = useStateValue();
   const dispatch = useDispatch();
   const handleNameChange = (e) => {};
-  return (
+  return ( 
     <Stack sx={{ bgcolor: "lightblue", p: 2 , borderRadius:'4px'}} spacing={2}>
       <Typography variant="h4">{step}. Project information</Typography>
       <TextField fullWidth label="Project name" required value={name} />

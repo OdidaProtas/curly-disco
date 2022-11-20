@@ -6,9 +6,13 @@ import {
   FormControl,
   InputLabel,
   Container,
+  Divider,
+  Typography,
+  Button,
 } from "@mui/material";
 
 import React from "react";
+import useActions from "../../pages/api/useActions";
 
 export default function Field({ modelIndex, fieldIndex }) {
   const [age, setAge] = React.useState("");
@@ -16,14 +20,19 @@ export default function Field({ modelIndex, fieldIndex }) {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  const { handleRemoveField } = useActions();
+
   return (
     <Container>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <h6>
-          <h5>Field {fieldIndex + 1}</h5>
-        </h6>
         <div>
-          <button>Delete field</button>
+          <Typography variant="h6">Field {fieldIndex + 1}</Typography>
+        </div>
+        <div>
+          <Button onClick={() => handleRemoveField(modelIndex, fieldIndex)}>
+            Delete field
+          </Button>
         </div>
       </div>
       <Stack spacing={2}>
@@ -44,6 +53,7 @@ export default function Field({ modelIndex, fieldIndex }) {
           </Select>
         </FormControl>
         <TextField size="small" label="Example" />
+        <Divider />
       </Stack>
     </Container>
   );

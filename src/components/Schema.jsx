@@ -8,7 +8,7 @@ export default function Schema() {
   const { models, step } = useStateValue();
   const { handleAddModel } = useActions();
   return (
-    <Box sx={{ maxHeight: "81vh", overflow: "auto" }}>
+    <Box>
       <Stack spacing={3}>
         <Typography variant="h4">{step}. Schemas </Typography>
         <Box>

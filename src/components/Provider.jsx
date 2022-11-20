@@ -12,6 +12,7 @@ const initialState = {
       ],
     },
   ],
+  relationships: [], // {type://}
   step: 1,
   maxStep: 4,
 };
@@ -48,6 +49,12 @@ var reducer = (state, action) => {
     }
     case "add_model": {
       return { ...state, models: [...(state?.models ?? []), payload] };
+    }
+    case "mutate_models": {
+      return { ...state, models: payload };
+    }
+    case 'add_relationship':{
+      return {...state, relationships:  [...(state?.relationships ?? []), payload]}
     }
     default:
       return { ...state };

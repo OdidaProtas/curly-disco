@@ -5,6 +5,7 @@ import Field from "./Field";
 import { useStateValue } from "./Provider";
 
 import * as React from "react";
+import useActions from "../../pages/api/useActions";
 
 export default function SchemaItem({ index }) {
   const { models } = useStateValue();
@@ -16,6 +17,9 @@ export default function SchemaItem({ index }) {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  const { handleRemoveModel, handleAdddField } = useActions();
+
   return (
     <Container>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -23,7 +27,9 @@ export default function SchemaItem({ index }) {
           Model: {index + 1} {md.name}
         </h6>
         <div>
-          <button>Delete model {md.name}</button>
+          <button onClick={() => handleRemoveModel(index)}>
+            Delete model {md.name}
+          </button>
         </div>
       </div>
       <Stack sx={{ my: 2 }} spacing={2}>
@@ -33,11 +39,12 @@ export default function SchemaItem({ index }) {
           return <Field modelIndex={index} fieldIndex={idx} key={idx} />;
         })}
         <Divider />
-        <Button disableElevation variant="contained">
+        <Button
+          onClick={() => handleAdddField(index)}
+          disableElevation
+          variant="contained"
+        >
           Add Field
-        </Button>
-        <Button disableElevation color="error" variant="contained">
-          Delete Model
         </Button>
       </Stack>
     </Container>

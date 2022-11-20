@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, Button } from "@mui/material";
+import { Box, Stack, Typography, Grid } from "@mui/material";
 import { useStateValue } from "./Provider";
 
 export default function Schema() {
@@ -6,9 +6,23 @@ export default function Schema() {
   return (
     <Stack spacing={3}>
       <Typography variant="h4">{step}. Preview </Typography>
-      {models.map((md, idx) => {
-        return <Box>{md.name}</Box>;
-      })}
+      <Box>
+        <Grid container spacing={2}>
+          {models.map((md, idx) => {
+            return (
+              <Grid
+                sx={{ p: 2, bgcolor: "lightblue", borderRadius: "4px", border:'1px solid cyan' }}
+                item
+                xs={3}
+              >
+                <Typography>
+                  Model {idx + 1} {md.name}
+                </Typography>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
     </Stack>
   );
 }
