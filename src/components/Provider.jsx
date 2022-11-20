@@ -2,9 +2,21 @@ import { createContext, useContext, useReducer } from "react";
 
 const initialState = {
   dispatch: () => {},
+  models: [
+    {
+      name: "",
+      fields: [
+        {
+          name: "",
+        },
+      ],
+    },
+  ],
+  step: 1,
+  maxStep: 4,
 };
 
-const StateContext = createContext({});
+const StateContext = createContext({ ...initialState });
 
 export default function Provider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -16,6 +28,28 @@ export default function Provider({ children }) {
 }
 
 export const useStateValue = () => useContext(StateContext);
-export const useDispatch = () => useContext(StateContext).dispatch;
+export const useDispatch = () => {
+  const { dispatch } = useContext(StateContext);
+  return dispatch;
+};
 
-var reducer = (action, state = {}) => {};
+var reducer = (state, action) => {
+  const { type, name, context, opts, payload } = action;
+
+  switch (type) {
+    case "handle_project_change": {
+      return { ...state, [name]: payload };
+    }
+    case "step": {
+      return { ...state, step: payload };
+    }
+    case "reset": {
+      return { ...initialState };
+    }
+    case "add_model": {
+      return { ...state, models: [...(state?.models ?? []), payload] };
+    }
+    default:
+      return { ...state };
+  }
+};
