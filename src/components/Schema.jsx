@@ -16,9 +16,6 @@ export default function Schema() {
       {models.map((md, idx) => {
           return (
             <Grid item xs={6} sx={{ bgcolor: "lightblue", border:'1px solid cyan',p:2 , borderRadius:'4px' }} key={idx}>
-              <h6>
-              Model: {idx} ({md.name})
-              </h6>
               <SchemaItem index={idx} />
             </Grid>
           );
